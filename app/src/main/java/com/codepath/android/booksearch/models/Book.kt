@@ -11,7 +11,7 @@ class Book(
     var author: String? = null,
     var title: String? = null,
     // Get book cover from covers API
-    val coverUrl: String = "https://covers.openlibrary.org/b/olid/$openLibraryId-L.jpg?default=false"
+    var coverUrl: String = "https://covers.openlibrary.org/b/olid/$openLibraryId-L.jpg?default=false"
 ) {
 
     companion object {
@@ -29,6 +29,7 @@ class Book(
                 }
                 book.title = if (jsonObject.has("title_suggest")) jsonObject.getString("title_suggest") else ""
                 book.author = getAuthor(jsonObject)
+                book.coverUrl = "https://covers.openlibrary.org/b/olid/" + book.openLibraryId + "-L.jpg?default=false";
             } catch (e: JSONException) {
                 e.printStackTrace()
                 return null
