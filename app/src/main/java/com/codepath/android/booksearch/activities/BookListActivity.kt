@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuItemCompat
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codepath.android.booksearch.R
@@ -21,7 +21,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
 import okhttp3.Headers
 import org.json.JSONArray
 import org.json.JSONException
-import java.util.ArrayList
+import java.util.*
 
 
 class BookListActivity : AppCompatActivity() {
@@ -35,17 +35,23 @@ class BookListActivity : AppCompatActivity() {
         rvBooks = findViewById(id.rvBooks)
 
         // Checkpoint #3
-        // Switch Activity to Use a Toolbar
+        // todo Switch Activity to Use a Toolbar done
         // see http://guides.codepath.org/android/Using-the-App-ToolBar#using-toolbar-as-actionbar
+
+        // Find the toolbar view inside the activity layout
+        val toolbar: Toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar)
 
         // Initialize the adapter
         bookAdapter = BookAdapter(this, booksList)
-        bookAdapter.setOnItemClickListener (object : OnItemClickListener {
+        bookAdapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(itemView: View?, position: Int) {
                 Toast.makeText(
-                    this@BookListActivity,
-                    "An item at position $position clicked!",
-                    Toast.LENGTH_SHORT).show()
+                        this@BookListActivity,
+                        "An item at position $position clicked!",
+                        Toast.LENGTH_SHORT).show()
 
                 // Handle item click here:
                 // Checkpoint #5
@@ -96,7 +102,7 @@ class BookListActivity : AppCompatActivity() {
             override fun onFailure(statusCode: Int, headers: Headers, responseString: String, throwable: Throwable) {
                 // Handle failed request here
                 Log.e(BookListActivity::class.java.simpleName,
-                    "Request failed with code $statusCode. Response message: $responseString")
+                        "Request failed with code $statusCode. Response message: $responseString")
             }
         })
     }

@@ -73,7 +73,7 @@ class BookAdapter(context: Context, aBooks: ArrayList<Book>) : Adapter<AdapterVi
         Glide.with(context)
             .load(Uri.parse(book.coverUrl))
             .apply(RequestOptions()
-                .placeholder(drawable.ic_nocover))
+                    .placeholder(drawable.ic_nocover))
             .into(viewHolder.ivCover)
         // Return the completed view to render on screen
     }
